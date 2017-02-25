@@ -1,42 +1,132 @@
 <!DOCTYPE html>
+
 <html>
 
-	<head>
-		<meta charset=utf-8>
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-			canvas { width: 100%; height: 100% }
-		</style>
-	</head>
-	<body><h1>Lonnie L. Souder
+<head>
+    <meta charset=utf-8>
+    <title>My first three.js app</title>
+    <style>
+        body {
+            margin: 0;
+        }
 
-		<script src="js/three.js"></script>
+        canvas {
+            width: 100%;
+            height: 100%
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lonnie L. Souder
+
+        <script src="js/three.js"></script>
+        <script src="js/OrbitControls.js"></script>
         <script>
-        var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+            /* global THREE */
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            var renderer = new THREE.WebGLRenderer();
+            var controls =
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            // Add the orbit controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.target = new THREE.Vector3(0, 0, 0);
 
-        var renderer = new THREE.WebGLRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( renderer.domElement );
+            addLights();
+            maketheskycube();
 
-        var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        var cube = new THREE.Mesh( geometry, material );
-        scene.add( cube );
+            var cubegeo = new THREE.BoxGeometry(1, 1, 1);
+            var cubemat = new THREE.MeshPhongMaterial({
+                color: 0x00dd00,
+                specular: 0x999999,
+                shininess: 0,
+                shading: THREE.SmoothShading
+            });
+            var cube1 = new THREE.Mesh(cubegeo, cubemat);
+            scene.add(cube1);
 
-        camera.position.z = 5;
+            cubemat = new THREE.MeshPhongMaterial({
+                color: 0xdddd00,
+                specular: 0x999999,
+                shininess: 0,
+                shading: THREE.FlatShading
+            });
 
-        var render = function () {
-            requestAnimationFrame( render );
+            var cube2 = new THREE.Mesh(cubegeo, cubemat);
+            cube2.position.set(1, 1, 1);
+            scene.add(cube2);
 
-            cube.rotation.x += 0.1;
-            cube.rotation.y += 0.1;
+            camera.position.z = 200;
 
-            renderer.render(scene, camera);
-        };
+            var render = function() {
+                requestAnimationFrame(render);
 
-        render();
+                cube1.rotation.x += 0.01;
+                cube2.rotation.y += 0.01;
+
+                renderer.render(scene, camera);
+                controls.update();
+            };
+
+            render();
+
+            function addLights() {
+                var dirLight = new THREE.DirectionalLight(0xffffff, 1);
+                dirLight.position.set(100, 100, 50);
+                scene.add(dirLight);
+
+                var point1 = new THREE.PointLight(0x333333, 3, 150);
+                point1.position.set(70, 5, 70);
+                scene.add(point1);
+                scene.add(new THREE.PointLightHelper(point1, 3));
+
+                var point2 = new THREE.PointLight(0x333333, 1, 150);
+                point2.position.set(-70, 5, 70);
+                scene.add(point2);
+                scene.add(new THREE.PointLightHelper(point2, 3));
+            }
+
+            function maketheskycube() {
+                // Create a cube used to build the floor and walls
+                var cube = new THREE.CubeGeometry(200, 1, 200);
+
+                var texloader = new THREE.TextureLoader();
+                var itsMe = texloader.load("images/Lonnie.jpg");
+
+                // create different materials
+                var floorMat = new THREE.MeshPhongMaterial({
+                    map: itsMe
+                });
+
+
+                // Floor
+                var floor = new THREE.Mesh(cube, floorMat);
+                floor.position.set(0, -50, 0)
+                scene.add(floor);
+                // Back wall
+                var backWall = new THREE.Mesh(cube, floorMat);
+                backWall.rotation.x = Math.PI / 180 * 90;
+                backWall.position.set(0, 50, -100);
+                scene.add(backWall);
+
+                // Left wall
+                var leftWall = new THREE.Mesh(cube, floorMat);
+                leftWall.rotation.x = Math.PI / 180 * -90;
+                leftWall.rotation.z = Math.PI / 180 * 90;
+                leftWall.position.set(-100, 50, 0);
+                scene.add(leftWall);
+
+                // Right wall
+                var rightWall = new THREE.Mesh(cube, floorMat);
+                rightWall.rotation.x = Math.PI / 180 * 90;
+                rightWall.rotation.z = Math.PI / 180 * 90;
+                rightWall.position.set(100, 50, 0);
+                scene.add(rightWall);
+
+            }
         </script>
-	</body>
+</body>
+
 </html>
