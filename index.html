@@ -6,7 +6,7 @@
 
 <head>
     <meta charset=utf-8>
-    <title>My first three.js app</title>
+    <title>I am Lonnie L. Souder</title>
     <style>
         body {
             margin: 0;
@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    <h1>Learning some Three.js
+    <h1>I am Lonnie L. Souder
 
         <!-- add overlay text using this -->
         <!-- <div id="info">Description</div> -->
@@ -67,7 +67,7 @@
                 bevelSize: 0.5,
                 bevelSegments: 3
             }
-            var textrot = add3dText();
+            var textfuncts = add3dText();
             addLights();
             maketheskycube();
 
@@ -78,14 +78,26 @@
                 requestAnimationFrame(render);
 
                 cuberot();
-                textrot();
+                textfuncts.rotate();
 
                 renderer.render(scene, camera);
                 controls.update();
             };
 
-//wait a sec so the fonts can load then reunder stuff.
-            setTimeout(render, 200);
+
+//wait a sec so the fonts can load then render stuff.
+console.log('wait for font to load...');
+var waitFont = function() {
+    if(textfuncts.meshReady()){
+        console.log("ready!");
+         render();
+    }
+    else{
+        console.log('waiting...');
+         setTimeout(waitFont, 1);
+    }
+}
+waitFont();
 
 // of the function defs start here
             function addLights() {
@@ -151,9 +163,6 @@
                     shininess: 0,
                     shading: THREE.SmoothShading
                 });
-                var fontLoading = async function() {
-                    console.log("done loading font");
-                }
                 var loader = new THREE.FontLoader();
                 loader.load('js/helvetiker_regular.typeface.json', function(font) {
 
@@ -170,11 +179,15 @@
                     geometry.center();
                     mesh = new THREE.Mesh(geometry, textmat);
                     scene.add(mesh);
-                    fontLoading();
                 });
 
-                return function() {
+                return {
+                    rotate: function() {
                     mesh.rotation.y += .02;
+                    },
+                    meshReady: function() {
+                        return typeof mesh !== 'undefined' && typeof mesh.rotation !== 'undefined';
+                    }
                 }
             }
 
