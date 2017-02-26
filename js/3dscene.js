@@ -4,7 +4,7 @@ var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-camera.position.z = 100;
+camera.position.z = 50;
 camera.updateProjectionMatrix();
 
 var renderer = new THREE.WebGLRenderer();
@@ -28,17 +28,17 @@ var data = {
   bevelSegments: 3
 }
 var textfuncts = add3dText();
-//addGary();
+addGary();
 addLights();
 maketheskycube();
 
-var cuberot = makeSomeRotatingCubes();
+//var cuberot = makeSomeRotatingCubes();
 
 //must define this before I call it???
 var render = function() {
   requestAnimationFrame(render);
 
-  cuberot();
+  //cuberot();
   textfuncts.rotate();
 
   renderer.render(scene, camera);
@@ -62,19 +62,16 @@ waitFont();
 
 // of the function defs start here
 function addLights() {
-  var dirLight = new THREE.DirectionalLight(0xffffff, 1);
-  dirLight.position.set(100, 100, 50);
+  var dirLight = new THREE.DirectionalLight(0xffffff, .5);
+  dirLight.position.set(0, 1, 1);
+  dirLight.castShadows = true;
   scene.add(dirLight);
 
-  var point1 = new THREE.PointLight(0x333333, 3, 150);
-  point1.position.set(70, 5, 70);
-  scene.add(point1);
-  scene.add(new THREE.PointLightHelper(point1, 3));
+  var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.2);
+  hemiLight.position.set(0, 1, 1);
+  hemiLight.castShadows = true;
+  scene.add(hemiLight);
 
-  var point2 = new THREE.PointLight(0x333333, 1, 150);
-  point2.position.set(-70, 5, 70);
-  scene.add(point2);
-  scene.add(new THREE.PointLightHelper(point2, 3));
 }
 
 function maketheskycube() {
@@ -92,7 +89,7 @@ function maketheskycube() {
 
   // Floor
   var floor = new THREE.Mesh(cube, floorMat);
-  floor.position.set(0, -50, 0)
+  floor.position.set(0, -20, 0)
   scene.add(floor);
   // Back wall
   var backWall = new THREE.Mesh(cube, floorMat);
@@ -113,6 +110,8 @@ function maketheskycube() {
   rightWall.rotation.z = Math.PI / 180 * 90;
   rightWall.position.set(100, 50, 0);
   scene.add(rightWall);
+
+  floor.receiveShadow = true;
 
 }
 
@@ -140,6 +139,7 @@ function add3dText() {
     geometry.center();
     mesh = new THREE.Mesh(geometry, textmat);
     scene.add(mesh);
+    mesh.castShadow = true;
   });
 
   return {
@@ -179,10 +179,10 @@ function makeSomeRotatingCubes() {
   }
 }
 
-// function addGary() {
-//   var loader = new THREE.JSONLoader();
-//   loader.load("js/gary.json", addModelToScene);
-// }
+function addGary() {
+  var loader = new THREE.JSONLoader();
+  loader.load("js/gary.json", addModelToScene);
+}
 // After loading JSON from our file, we add it to the scene
 function addModelToScene(geometry, materials) {
   var material = new THREE.MeshFaceMaterial(materials);
