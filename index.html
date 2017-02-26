@@ -38,7 +38,7 @@
         <script src="js/three.js"></script>
         <script src="js/OrbitControls.js"></script>
         <script>
-         console.log("Gwkki wcwetvt");
+            console.log("Gwkki wcwetvt");
             /* global THREE */
             var scene = new THREE.Scene();
 
@@ -57,7 +57,7 @@
 
             var data = {
                 text: "Lonnie L. Souder",
-                size: 10,
+                size: 5,
                 height: 2,
                 curveSegments: 12,
                 font: "helvetiker",
@@ -73,7 +73,7 @@
 
             var cuberot = makeSomeRotatingCubes();
 
-//must define this before I call it???
+            //must define this before I call it???
             var render = function() {
                 requestAnimationFrame(render);
 
@@ -85,21 +85,21 @@
             };
 
 
-//wait a sec so the fonts can load then render stuff.
-console.log('wait for font to load...');
-var waitFont = function() {
-    if(textfuncts.meshReady()){
-        console.log("ready!");
-         render();
-    }
-    else{
-        console.log('waiting...');
-         setTimeout(waitFont, 1);
-    }
-}
-waitFont();
+            //wait a sec so the fonts can load then render stuff.
+            console.log('wait for font to load...');
+            var waitFont = function() {
+                if (textfuncts.meshReady()) {
+                    console.log("ready!");
+                    render();
+                }
+                else {
+                    console.log('waiting...');
+                    setTimeout(waitFont, 1);
+                }
+            }
+            waitFont();
 
-// of the function defs start here
+            // of the function defs start here
             function addLights() {
                 var dirLight = new THREE.DirectionalLight(0xffffff, 1);
                 dirLight.position.set(100, 100, 50);
@@ -183,7 +183,7 @@ waitFont();
 
                 return {
                     rotate: function() {
-                    mesh.rotation.y += .02;
+                       //mesh.rotation.y += .02;
                     },
                     meshReady: function() {
                         return typeof mesh !== 'undefined' && typeof mesh.rotation !== 'undefined';
