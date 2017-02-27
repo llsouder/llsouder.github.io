@@ -1,5 +1,10 @@
 console.log("Starting three script");
 /* global THREE */
+
+// x (+)right to (-)left
+// y (+)up to (-)down
+// z (+)forwar to (-)backward
+
 var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -32,7 +37,19 @@ addGary();
 addLights();
 maketheskycube();
 
-//var cuberot = makeSomeRotatingCubes();
+renderer.shadowMapEnabled = true;
+renderer.shadowMapSoft = true;
+
+renderer.shadowCameraNear = 3;
+renderer.shadowCameraFar = camera.far;
+renderer.shadowCameraFov = 50;
+
+renderer.shadowMapBias = 0.0039;
+renderer.shadowMapDarkness = 0.5;
+renderer.shadowMapWidth = 1024;
+renderer.shadowMapHeight = 1024;
+
+
 
 //must define this before I call it???
 var render = function() {
@@ -63,13 +80,24 @@ waitFont();
 // of the function defs start here
 function addLights() {
   var dirLight = new THREE.DirectionalLight(0xffffff, .5);
-  dirLight.position.set(0, 1, 1);
-  dirLight.castShadows = true;
+  dirLight.position.set(0, 100, 100);
+  dirLight.castShadow = true;
+
+  // dirLight.shadowCameraNear = 2;
+  // dirLight.shadowCameraFar = 5;
+  dirLight.shadowCameraLeft = -100;
+  dirLight.shadowCameraRight = 100;
+  dirLight.shadowCameraTop = 100;
+  dirLight.shadowCameraBottom = -100;
+
   scene.add(dirLight);
 
+  // var helper1 = new THREE.CameraHelper(dirLight.shadow.camera);
+  // scene.add(helper1);
+
   var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.2);
-  hemiLight.position.set(0, 1, 1);
-  hemiLight.castShadows = true;
+  hemiLight.position.set(0, -1, 1);
+  hemiLight.castShadow = true;
   scene.add(hemiLight);
 
 }
@@ -82,30 +110,37 @@ function maketheskycube() {
   var itsMe = texloader.load("images/Lonnie.jpg");
 
   // create different materials
-  var floorMat = new THREE.MeshPhongMaterial({
+  var itsMeMat = new THREE.MeshPhongMaterial({
     map: itsMe
   });
 
 
-  // Floor
-  var floor = new THREE.Mesh(cube, floorMat);
-  floor.position.set(0, -20, 0)
+  /* Floor  */
+  var geometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
+  var material = new THREE.MeshPhongMaterial({
+    color: 0x0000aa
+  });
+  var floor = new THREE.Mesh(geometry, material);
+  floor.material.side = THREE.DoubleSide;
+  floor.rotation.x = Math.PI / 180 * 90;
+  floor.position.set(0, -10, 0);
   scene.add(floor);
+
   // Back wall
-  var backWall = new THREE.Mesh(cube, floorMat);
+  var backWall = new THREE.Mesh(cube, itsMeMat);
   backWall.rotation.x = Math.PI / 180 * 90;
   backWall.position.set(0, 50, -100);
   scene.add(backWall);
 
   // Left wall
-  var leftWall = new THREE.Mesh(cube, floorMat);
+  var leftWall = new THREE.Mesh(cube, itsMeMat);
   leftWall.rotation.x = Math.PI / 180 * -90;
   leftWall.rotation.z = Math.PI / 180 * 90;
   leftWall.position.set(-100, 50, 0);
   scene.add(leftWall);
 
   // Right wall
-  var rightWall = new THREE.Mesh(cube, floorMat);
+  var rightWall = new THREE.Mesh(cube, itsMeMat);
   rightWall.rotation.x = Math.PI / 180 * 90;
   rightWall.rotation.z = Math.PI / 180 * 90;
   rightWall.position.set(100, 50, 0);
@@ -187,6 +222,8 @@ function addGary() {
 function addModelToScene(geometry, materials) {
   var material = new THREE.MeshFaceMaterial(materials);
   var model = new THREE.Mesh(geometry, material);
-  model.scale.set(0.5, 0.5, 0.5);
+  model.scale.set(2, 2, 2);
+  model.castShadow = true;
+  model.position.set(-40, -2, -20);
   scene.add(model);
 }
