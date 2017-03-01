@@ -6,7 +6,18 @@
 
 
 
-
+function addTheFloor(scene) {
+  /* Floor  */
+  var geometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
+  var material = new THREE.MeshPhongMaterial({
+    color: 0x0000aa
+  });
+  var floor = new THREE.Mesh(geometry, material);
+  floor.material.side = THREE.DoubleSide;
+  floor.rotation.x = Math.PI / 180 * 90;
+  floor.position.set(0, -10, 0);
+  scene.add(floor);
+}
 
 // of the function defs start here
 function addLights(scene) {
