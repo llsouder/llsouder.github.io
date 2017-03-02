@@ -7,14 +7,9 @@
 
 
 function addTheFloor(scene) {
-  /* Floor  */
-  var geometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
-  var material = new THREE.MeshPhongMaterial({
-    color: 0x0000aa
-  });
-  var floor = new THREE.Mesh(geometry, material);
-  floor.material.side = THREE.DoubleSide;
-  floor.rotation.x = Math.PI / 180 * 90;
+
+  var floor = checkerBoard(8);
+  floor.rotation.x = Math.PI / 180 * -90;
   floor.position.set(0, -10, 0);
   scene.add(floor);
 }
@@ -170,4 +165,27 @@ function addGary(scene) {
     model.position.set(-40, -2, -20);
     scene.add(model);
   }
+}
+
+function checkerBoard(segments) {
+  //Build a checkerboard colored square plane with "segments"
+  //number of tiles per side. Using three.js v62
+  var geometry = new THREE.PlaneGeometry(100, 100, segments, segments);
+  var materialEven = new THREE.MeshBasicMaterial({
+    color: 0xccccfc
+  });
+  var materialOdd = new THREE.MeshBasicMaterial({
+    color: 0x444464
+  });
+  var materials = [materialEven, materialOdd];
+
+  for (var x = 0; x < segments; x++) {
+    for (var y = 0; y < segments; y++) {
+      var i = x * segments + y
+      var j = 2 * i
+      geometry.faces[j].materialIndex = geometry.faces[j + 1].materialIndex = (x + y) % 2
+    }
+  }
+
+  return new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials))
 }
