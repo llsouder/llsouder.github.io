@@ -8,9 +8,10 @@
 
 function addTheFloor(scene) {
 
-  var floor = checkerBoard(8);
+  var floor = checkerBoard(20);
   floor.rotation.x = Math.PI / 180 * -90;
   floor.position.set(0, -10, 0);
+  floor.receiveShadow = true;
   scene.add(floor);
 }
 
