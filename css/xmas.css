@@ -1,0 +1,26 @@
+h1 {
+	font-family: "Mountains of Christmas";
+	font-size: 40px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+
+body {
+  background-color: #AA3A3B;
+}
+  triangle {
+    fill: green !important;
+  }
+
+.triangle-container {
+  width: 600px;
+  margin: auto;
+  text-align:center;
+  border: 4px solid green;
+
+  .triangle {
+    fill: green !important;
+  }
+}
