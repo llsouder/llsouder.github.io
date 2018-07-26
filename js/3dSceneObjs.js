@@ -10,7 +10,7 @@ function addTheFloor(scene) {
 
   var floor = checkerBoard(20);
   floor.rotation.x = Math.PI / 180 * -90;
-  floor.position.set(0, -10, 0);
+  floor.position.set(0, -8, 0);
   floor.receiveShadow = true;
   scene.add(floor);
 }
@@ -112,6 +112,7 @@ function add3dText(data, scene) {
     });
     geometry.center();
     mesh = new THREE.Mesh(geometry, textmat);
+    mesh.position.set(data.x, data.y, data.z);
     scene.add(mesh);
     mesh.castShadow = true;
   });
