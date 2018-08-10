@@ -1,0 +1,7 @@
+/* some style */
+
+#app {
+    background: #ccc; /* only for visibility */
+    margin:0 auto;
+    width: 700px;
+}
