@@ -29,9 +29,9 @@ data_project.parse.list_colors = (function data_project$parse$list_colors(p_data
 return cljs.core.keys.call(null,cljs.core.group_by.call(null,new cljs.core.Keyword(null,"Color","Color",1460651487),p_data));
 });
 data_project.parse.get_names = (function data_project$parse$get_names(color,p_data){
-return cljs.core.map.call(null,new cljs.core.Keyword(null,"Name","Name",-131211369),cljs.core.filter.call(null,(function (p1__26465_SHARP_){
-return cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"Color","Color",1460651487).cljs$core$IFn$_invoke$arity$1(p1__26465_SHARP_),color);
+return cljs.core.map.call(null,new cljs.core.Keyword(null,"Name","Name",-131211369),cljs.core.filter.call(null,(function (p1__27356_SHARP_){
+return cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"Color","Color",1460651487).cljs$core$IFn$_invoke$arity$1(p1__27356_SHARP_),color);
 }),p_data));
 });
 
-//# sourceMappingURL=parse.js.map?rel=1533908786075
+//# sourceMappingURL=parse.js.map?rel=1534123151381

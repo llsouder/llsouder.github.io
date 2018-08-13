@@ -11,4 +11,4 @@ return null;
 reagent.core.render.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [data_project.page.home_page], null),document.getElementById("app"));
 data_project.scene.add_scene.call(null,document.getElementById("app"));
 
-//# sourceMappingURL=core.js.map?rel=1533908786120
+//# sourceMappingURL=core.js.map?rel=1534123151645

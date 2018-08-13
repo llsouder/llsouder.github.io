@@ -7,4 +7,4 @@ data_project.color.name_to_hex = (function data_project$color$name_to_hex(color)
 return cljs.core.get.call(null,data_project.color.colors,clojure.string.lower_case.call(null,color));
 });
 
-//# sourceMappingURL=color.js.map?rel=1533908782818
+//# sourceMappingURL=color.js.map?rel=1534123149261

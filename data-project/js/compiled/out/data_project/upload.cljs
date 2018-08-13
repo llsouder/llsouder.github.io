@@ -52,3 +52,4 @@
 ;; input component to allow users to upload file.
 (defn input-component []
   [:input {:type "file" :id "file" :accept ".txt" :name "file" :on-change put-upload}])
+

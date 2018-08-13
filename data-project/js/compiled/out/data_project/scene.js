@@ -75,4 +75,4 @@ data_project.scene.add_scene = (function data_project$scene$add_scene(element){
 return element.appendChild(data_project.scene.renderer.domElement);
 });
 
-//# sourceMappingURL=scene.js.map?rel=1533908786095
+//# sourceMappingURL=scene.js.map?rel=1534123151418

@@ -4,4 +4,30 @@
     background: #ccc; /* only for visibility */
     margin:0 auto;
     width: 700px;
+    height: 300px;
+}
+
+#dog-panel {
+    float: right;
+    height: 250px;
+    width: 50%;
+}
+
+#dog-button {
+    float: top;
+    height: 20px;
+}
+
+#button-panel {
+    float: left;
+    height: 250px;
+    width: 50%;
+}
+
+#person-panel {
+    background-color: #777777;
+    float: left;
+    height: 250px;
+    width: 50%;
+    overflow-y: scroll;
 }
