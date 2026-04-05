@@ -1,0 +1,8 @@
+{
+  "source": "Local snapshot placeholder",
+  "updatedAt": "2026-04-05T19:20:00Z",
+  "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Mon", "Tue", "Wed", "Thu", "Fri"],
+  "values": [5078, 5102, 5088, 5124, 5141, 5168, 5152, 5176, 5194, 5210],
+  "latest": 5210,
+  "mode": "fallback"
+}

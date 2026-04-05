@@ -78,6 +78,7 @@
       border: 1px solid rgba(255,255,255,0.08);
       padding: 16px;
       min-height: 420px;
+      position: relative;
     }
     .links a {
       display: block;
@@ -114,17 +115,17 @@
   <div class="container">
     <header>
       <h1>📈 S&amp;P 500 Tracker</h1>
-      <div class="subtitle">A custom chart page for following the S&amp;P 500 with live reference links.</div>
+      <div class="subtitle">A custom chart page that reads from a site data file instead of a flaky widget.</div>
     </header>
 
     <div class="grid">
       <section class="card">
         <h2>What This Page Is For</h2>
-        <div class="big">S&amp;P 500</div>
-        <div class="pill">Large-cap U.S. market benchmark</div>
+        <div class="big" id="latestValue">Loading…</div>
+        <div class="pill" id="dataMode">Reading site data</div>
         <div class="meta">
           <p>The S&amp;P 500 tracks 500 of the largest publicly traded U.S. companies and is one of the main ways people judge the overall stock market.</p>
-          <p>This version uses a custom on-page chart and keeps live reference links for checking the latest market number.</p>
+          <p>This version reads from a local JSON data file so the page can be refreshed later without depending on embedded third-party widgets.</p>
         </div>
 
         <div class="note">
@@ -147,60 +148,75 @@
         <h2>Chart</h2>
         <div class="chart-box">
           <canvas id="spChart"></canvas>
-          <div class="status" id="chartStatus">Showing sample trend data for layout. Live external links are on the left.</div>
+          <div class="status" id="chartStatus">Loading chart data…</div>
         </div>
         <div class="note">
-          This custom chart is built directly into the page so it should display more reliably than the old widget.
+          This page is now wired to read a local <code>data.json</code> file. Once that file is refreshed with market data, the chart updates without needing a fragile embed.
         </div>
       </section>
     </div>
 
     <footer>
-      <p>Use the links for live market values. The chart on this page is rendered locally for reliability.</p>
+      <p>Live links remain available on the left. This page is now ready for a future auto-refresh data pipeline.</p>
     </footer>
   </div>
 
   <script>
-    const ctx = document.getElementById('spChart');
-    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-    const data = [5078, 5102, 5088, 5124, 5141, 5168, 5152, 5176, 5194, 5210];
+    async function loadData() {
+      const latestValueEl = document.getElementById('latestValue');
+      const modeEl = document.getElementById('dataMode');
+      const statusEl = document.getElementById('chartStatus');
+      try {
+        const res = await fetch('./data.json', { cache: 'no-store' });
+        const data = await res.json();
+        latestValueEl.textContent = data.latest ? Number(data.latest).toLocaleString() : 'Unavailable';
+        modeEl.textContent = data.mode === 'fallback' ? 'Fallback snapshot' : 'Live snapshot';
+        statusEl.textContent = `Source: ${data.source} • Updated: ${data.updatedAt}`;
 
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [{
-          label: 'S&P 500',
-          data,
-          borderColor: '#60a5fa',
-          backgroundColor: 'rgba(96, 165, 250, 0.18)',
-          borderWidth: 3,
-          fill: true,
-          tension: 0.3,
-          pointRadius: 4,
-          pointBackgroundColor: '#93c5fd'
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: {
-            ticks: { color: '#cbd5e1' },
-            grid: { color: 'rgba(255,255,255,0.08)' }
+        const ctx = document.getElementById('spChart');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: data.labels,
+            datasets: [{
+              label: 'S&P 500',
+              data: data.values,
+              borderColor: '#60a5fa',
+              backgroundColor: 'rgba(96, 165, 250, 0.18)',
+              borderWidth: 3,
+              fill: true,
+              tension: 0.3,
+              pointRadius: 3,
+              pointBackgroundColor: '#93c5fd'
+            }]
           },
-          y: {
-            ticks: { color: '#cbd5e1' },
-            grid: { color: 'rgba(255,255,255,0.08)' }
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                ticks: { color: '#cbd5e1' },
+                grid: { color: 'rgba(255,255,255,0.08)' }
+              },
+              y: {
+                ticks: { color: '#cbd5e1' },
+                grid: { color: 'rgba(255,255,255,0.08)' }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: { color: '#e5eef7' }
+              }
+            }
           }
-        },
-        plugins: {
-          legend: {
-            labels: { color: '#e5eef7' }
-          }
-        }
+        });
+      } catch (err) {
+        latestValueEl.textContent = 'Unavailable';
+        modeEl.textContent = 'Data load failed';
+        statusEl.textContent = 'Could not load data.json';
       }
-    });
+    }
+    loadData();
   </script>
 </body>
 </html>
