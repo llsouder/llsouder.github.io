@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perch Fishing from Hanseys Creek Boat Launch - Dividing Creek / Maurice River Area, NJ</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #17364a 0%, #0b2230 100%);
+            min-height: 100vh;
+            color: #e8f4f8;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(23, 54, 74, 0.92) 0%, rgba(11, 34, 48, 0.75) 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .location { font-size: 1.2rem; color: #7dd3e8; margin-bottom: 20px; }
+        .coords {
+            background: rgba(0,0,0,0.3);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            font-family: monospace;
+            color: #a8e6cf;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .card h2 {
+            color: #7dd3e8;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(125, 211, 232, 0.3);
+        }
+        .tide-table, .fishing-calendar { width: 100%; border-collapse: collapse; }
+        .tide-table th, .tide-table td, .fishing-calendar th, .fishing-calendar td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .tide-table th, .fishing-calendar th { color: #7dd3e8; font-weight: 600; }
+        .high-tide { color: #4ade80; font-weight: bold; }
+        .low-tide { color: #f87171; }
+        .best-day { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; }
+        .good-day { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; }
+        .fair-day { background: rgba(251, 191, 36, 0.2); border-left: 4px solid #fbbf24; }
+        .poor-day { background: rgba(239, 68, 68, 0.2); border-left: 4px solid #ef4444; }
+        .indicator {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        .indicator-icon { font-size: 2rem; }
+        .indicator h3 { color: #7dd3e8; margin-bottom: 5px; }
+        .solunar-times {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f2847 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        .solunar-times h3 { color: #fbbf24; margin-bottom: 15px; }
+        .time-block {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            gap: 10px;
+        }
+        .time-block:last-child { border-bottom: none; }
+        .time-label { color: #a8e6cf; }
+        .time-value { font-weight: bold; color: #fff; text-align: right; }
+        .tips-list { list-style: none; }
+        .tips-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-left: 25px;
+            position: relative;
+        }
+        .tips-list li:before { content: "🎣"; position: absolute; left: 0; }
+        .tips-list li:last-child { border-bottom: none; }
+        footer { text-align: center; padding: 30px; color: #64748b; font-size: 0.9rem; }
+        .update-time {
+            background: rgba(0,0,0,0.3);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+        }
+        a.inline-link { color: #7dd3e8; }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; }
+            .fishing-calendar { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎣 Perch Fishing Launch Guide</h1>
+            <div class="location">Hanseys Creek Boat Launch • Dividing Creek / Maurice River Area, New Jersey</div>
+            <div class="coords">📍 Hansey Creek Rd launch area • Port Norris / Maurice River Township, NJ</div>
+            <div class="update-time">Centered on launch conditions, tides, weather, and whether it's worth making the trip</div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h2>🚤 Launch Decision Today</h2>
+                <table class="tide-table">
+                    <tr>
+                        <th>Factor</th>
+                        <th>Status</th>
+                        <th>Takeaway</th>
+                    </tr>
+                    <tr>
+                        <td class="high-tide">Weather</td>
+                        <td>Stormy Sunday PM</td>
+                        <td>Bad launch window this afternoon</td>
+                    </tr>
+                    <tr>
+                        <td class="high-tide">Monday</td>
+                        <td>Sunny, high near 57</td>
+                        <td>Much better boat-launch day</td>
+                    </tr>
+                    <tr>
+                        <td class="low-tide">Wind</td>
+                        <td>10-15 mph, gusts 20-25+</td>
+                        <td>Can make shallow creek travel annoying</td>
+                    </tr>
+                </table>
+
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #7dd3e8; margin-bottom: 10px;">☀️ Near-Term Forecast</h3>
+                    <div class="time-block">
+                        <span class="time-label">Sunday afternoon</span>
+                        <span class="time-value">Showers, thunderstorms, temp falling</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-label">Tonight</span>
+                        <span class="time-value">Clearing, low around 40</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-label">Monday</span>
+                        <span class="time-value">Sunny, high near 57</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-label">Tuesday</span>
+                        <span class="time-value">Sunny, breezy, high near 53</span>
+                    </div>
+                </div>
+
+                <div class="solunar-times">
+                    <h3>✅ Best Call Right Now</h3>
+                    <div class="time-block">
+                        <span class="time-label">Today</span>
+                        <span class="time-value">Skip or go only if weather clears fast</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-label">Best next launch</span>
+                        <span class="time-value">Monday morning to early afternoon</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-label">Backup option</span>
+                        <span class="time-value">Tuesday, but expect more wind</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🌊 Tide Strategy for Launching</h2>
+                <div class="indicator">
+                    <div class="indicator-icon">⬆️</div>
+                    <div>
+                        <h3>Best for Launch / Travel</h3>
+                        <p>Mid-incoming through high tide is generally the easiest window when you want more cushion in the creeks and less worry about thin water.</p>
+                    </div>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-icon">↔️</div>
+                    <div>
+                        <h3>Best for Starting to Fish</h3>
+                        <p>High slack into the first part of the outgoing tide is usually the sweet spot for setting up on perch along bends, cuts, and current edges.</p>
+                    </div>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-icon">⬇️</div>
+                    <div>
+                        <h3>Watch Low Water</h3>
+                        <p>Low tide can leave less room for mistakes in shallow marsh creeks. If you launch too late or linger too long, the ride out can get ugly.</p>
+                    </div>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-icon">🗺️</div>
+                    <div>
+                        <h3>Practical Rule</h3>
+                        <p>At Hanseys Creek, think about the launch first, fishing second: enough water to get out cleanly matters more than squeezing in a marginal tide.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Fishing Outlook After Launch</h2>
+                <div class="indicator">
+                    <div class="indicator-icon">🎣</div>
+                    <div>
+                        <h3>Target Water</h3>
+                        <p>Fish creek turns, outside bends, feeder ditches, and any drop where current sweeps forage off the flats.</p>
+                    </div>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-icon">🦐</div>
+                    <div>
+                        <h3>Bait & Chum</h3>
+                        <p>Grass shrimp is still the play. A slow, steady chum line can hold perch when the water is moving right.</p>
+                    </div>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-icon">💨</div>
+                    <div>
+                        <h3>Wind Impact</h3>
+                        <p>Wind against tide can ruin boat control, especially in small creeks. Protected edges and lee shorelines become much more important.</p>
+                    </div>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-icon">🌡️</div>
+                    <div>
+                        <h3>Spring Pattern</h3>
+                        <p>Sunny afternoons can improve the bite, especially around dark-bottom shallows and marsh grass edges that warm faster.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📅 Best Near-Term Launch Days</h2>
+                <table class="fishing-calendar">
+                    <tr>
+                        <th>Date</th>
+                        <th>Rating</th>
+                        <th>Why</th>
+                    </tr>
+                    <tr class="poor-day">
+                        <td>Apr 5</td>
+                        <td>⚠️ Poor</td>
+                        <td>Thunderstorms, gusts, falling temps</td>
+                    </tr>
+                    <tr class="good-day">
+                        <td>Apr 6</td>
+                        <td>⭐⭐ Good</td>
+                        <td>Sunny, safer, better overall launch conditions</td>
+                    </tr>
+                    <tr class="fair-day">
+                        <td>Apr 7</td>
+                        <td>⭐ Fair</td>
+                        <td>Fishable, but windier</td>
+                    </tr>
+                    <tr class="good-day">
+                        <td>Apr 15-19</td>
+                        <td>⭐⭐ Good</td>
+                        <td>Approaching and just after new moon window</td>
+                    </tr>
+                    <tr class="best-day">
+                        <td>Apr 17</td>
+                        <td>⭐⭐⭐ Best</td>
+                        <td>Prime new moon period if weather behaves</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🛶 Hanseys Creek Launch Notes</h2>
+            <ul class="tips-list">
+                <li><strong>Plan around water level:</strong> This page is built around the idea that a good fishing plan starts with a clean launch and recovery window.</li>
+                <li><strong>Don’t force low tide:</strong> In marsh systems, low water can turn an easy trip into a mud-and-prop problem fast.</li>
+                <li><strong>Wind matters as much as fish:</strong> Even if the perch should bite, gusty conditions can make the run and setup more trouble than it’s worth.</li>
+                <li><strong>Aim for mid-incoming to high:</strong> That usually gives the best cushion for launching, moving, and then fishing the first outgoing flow.</li>
+                <li><strong>Scout your route:</strong> If you haven’t run it recently, assume shoals and soft edges have changed.</li>
+                <li><strong>Use Monday as the benchmark:</strong> With sunny weather and less chaos, Monday is the kind of day this launch page is trying to point you toward.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🔗 Related Pages</h2>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px;">
+                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #7dd3e8; margin-bottom: 10px;">Mosquito Landing</h4>
+                    <p><a class="inline-link" href="/perch-fishing/">Open the Tuckahoe River perch page</a></p>
+                </div>
+                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #7dd3e8; margin-bottom: 10px;">Homepage</h4>
+                    <p><a class="inline-link" href="/">Back to LLSouder Land</a></p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Weather based on National Weather Service forecast for the Hanseys Creek / Maurice River area.</p>
+            <p style="margin-top: 10px;">Always confirm launch condition, water depth, and weather before making the run.</p>
+            <div class="update-time">Updated: April 5, 2026</div>
+        </footer>
+    </div>
+</body>
+</html>
