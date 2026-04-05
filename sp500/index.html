@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>S&P 500 Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       margin: 0;
@@ -75,7 +76,8 @@
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.08);
-      min-height: 520px;
+      padding: 16px;
+      min-height: 420px;
     }
     .links a {
       display: block;
@@ -91,6 +93,11 @@
       color: #dbeafe;
       line-height: 1.6;
     }
+    .status {
+      margin-top: 12px;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
     footer {
       text-align: center;
       margin-top: 24px;
@@ -99,7 +106,7 @@
     @media (max-width: 900px) {
       .grid { grid-template-columns: 1fr; }
       .big { font-size: 2.4rem; }
-      .chart-box { min-height: 460px; }
+      .chart-box { min-height: 360px; }
     }
   </style>
 </head>
@@ -107,7 +114,7 @@
   <div class="container">
     <header>
       <h1>📈 S&amp;P 500 Tracker</h1>
-      <div class="subtitle">A simple market page for following the S&amp;P 500 and checking a live chart.</div>
+      <div class="subtitle">A custom chart page for following the S&amp;P 500 with live reference links.</div>
     </header>
 
     <div class="grid">
@@ -117,7 +124,7 @@
         <div class="pill">Large-cap U.S. market benchmark</div>
         <div class="meta">
           <p>The S&amp;P 500 tracks 500 of the largest publicly traded U.S. companies and is one of the main ways people judge the overall stock market.</p>
-          <p>This page gives you a clean place to check the index and view a live chart.</p>
+          <p>This version uses a custom on-page chart and keeps live reference links for checking the latest market number.</p>
         </div>
 
         <div class="note">
@@ -131,38 +138,69 @@
           <strong>Quick links:</strong>
           <a href="https://www.google.com/finance/quote/.INX:INDEXSP" target="_blank">Google Finance - S&amp;P 500</a>
           <a href="https://finance.yahoo.com/quote/%5EGSPC/" target="_blank">Yahoo Finance - S&amp;P 500</a>
-          <a href="https://www.tradingview.com/symbols/SPX/" target="_blank">TradingView - SPX</a>
+          <a href="https://www.marketwatch.com/investing/index/spx" target="_blank">MarketWatch - S&amp;P 500</a>
           <a href="/">Back to homepage</a>
         </div>
       </section>
 
       <section class="card">
-        <h2>Market View</h2>
-        <div class="note">
-          <strong>Live options:</strong><br>
-          • <a href="https://www.google.com/finance/quote/.INX:INDEXSP" target="_blank">Open S&amp;P 500 on Google Finance</a><br>
-          • <a href="https://finance.yahoo.com/quote/%5EGSPC/" target="_blank">Open S&amp;P 500 on Yahoo Finance</a><br>
-          • <a href="https://www.marketwatch.com/investing/index/spx" target="_blank">Open S&amp;P 500 on MarketWatch</a>
-        </div>
-
-        <div class="chart-box" style="display:flex; align-items:center; justify-content:center; padding:24px; text-align:center;">
-          <div>
-            <div style="font-size:1.5rem; color:#93c5fd; margin-bottom:14px;">Quick Open</div>
-            <p style="line-height:1.7; color:#dbeafe; max-width:420px; margin:0 auto 18px auto;">
-              Embedded market widgets can be blocked or fail on some devices. This page now gives you clean direct links that should work more reliably.
-            </p>
-            <p><a href="https://www.google.com/finance/quote/.INX:INDEXSP" target="_blank" style="display:inline-block; padding:12px 18px; border-radius:12px; background:#2563eb; color:white; text-decoration:none; font-weight:700;">Open Live S&amp;P 500</a></p>
-          </div>
+        <h2>Chart</h2>
+        <div class="chart-box">
+          <canvas id="spChart"></canvas>
+          <div class="status" id="chartStatus">Showing sample trend data for layout. Live external links are on the left.</div>
         </div>
         <div class="note">
-          If you want, I can next replace this with a custom chart page using a different data source instead of third-party embeds.
+          This custom chart is built directly into the page so it should display more reliably than the old widget.
         </div>
       </section>
     </div>
 
     <footer>
-      <p>This page uses external financial data/chart providers for live information.</p>
+      <p>Use the links for live market values. The chart on this page is rendered locally for reliability.</p>
     </footer>
   </div>
+
+  <script>
+    const ctx = document.getElementById('spChart');
+    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+    const data = [5078, 5102, 5088, 5124, 5141, 5168, 5152, 5176, 5194, 5210];
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'S&P 500',
+          data,
+          borderColor: '#60a5fa',
+          backgroundColor: 'rgba(96, 165, 250, 0.18)',
+          borderWidth: 3,
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#93c5fd'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            ticks: { color: '#cbd5e1' },
+            grid: { color: 'rgba(255,255,255,0.08)' }
+          },
+          y: {
+            ticks: { color: '#cbd5e1' },
+            grid: { color: 'rgba(255,255,255,0.08)' }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: { color: '#e5eef7' }
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
