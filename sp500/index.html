@@ -137,18 +137,25 @@
       </section>
 
       <section class="card">
-        <h2>Live Chart</h2>
-        <div class="chart-box">
-          <iframe
-            title="S&P 500 live chart"
-            src="https://www.tradingview.com/widgetembed/?frameElementId=tradingview_spx&symbol=SP%3ASPX&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=America%2FNew_York&withdateranges=1&hideideas=1"
-            style="width:100%; height:520px; border:0;"
-            allowtransparency="true"
-            scrolling="no">
-          </iframe>
+        <h2>Market View</h2>
+        <div class="note">
+          <strong>Live options:</strong><br>
+          • <a href="https://www.google.com/finance/quote/.INX:INDEXSP" target="_blank">Open S&amp;P 500 on Google Finance</a><br>
+          • <a href="https://finance.yahoo.com/quote/%5EGSPC/" target="_blank">Open S&amp;P 500 on Yahoo Finance</a><br>
+          • <a href="https://www.marketwatch.com/investing/index/spx" target="_blank">Open S&amp;P 500 on MarketWatch</a>
+        </div>
+
+        <div class="chart-box" style="display:flex; align-items:center; justify-content:center; padding:24px; text-align:center;">
+          <div>
+            <div style="font-size:1.5rem; color:#93c5fd; margin-bottom:14px;">Quick Open</div>
+            <p style="line-height:1.7; color:#dbeafe; max-width:420px; margin:0 auto 18px auto;">
+              Embedded market widgets can be blocked or fail on some devices. This page now gives you clean direct links that should work more reliably.
+            </p>
+            <p><a href="https://www.google.com/finance/quote/.INX:INDEXSP" target="_blank" style="display:inline-block; padding:12px 18px; border-radius:12px; background:#2563eb; color:white; text-decoration:none; font-weight:700;">Open Live S&amp;P 500</a></p>
+          </div>
         </div>
         <div class="note">
-          If the embedded chart doesn’t load on your device, use one of the quick links on the left.
+          If you want, I can next replace this with a custom chart page using a different data source instead of third-party embeds.
         </div>
       </section>
     </div>
