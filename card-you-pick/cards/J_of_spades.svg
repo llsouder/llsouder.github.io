@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420">
-  <rect x="8" y="8" width="284" height="404" rx="18" fill="white" stroke="#222" stroke-width="4"/>
-  <text x="30" y="52" font-size="42" font-family="Georgia, serif" fill="#111111">J</text>
-  <text x="32" y="88" font-size="34" font-family="Georgia, serif" fill="#111111">♠</text>
-  <text x="270" y="370" font-size="42" text-anchor="end" font-family="Georgia, serif" fill="#111111">J</text>
-  <text x="268" y="336" font-size="34" text-anchor="end" font-family="Georgia, serif" fill="#111111">♠</text>
-  <text x="150" y="220" font-size="120" text-anchor="middle" font-family="Georgia, serif" fill="#111111">♠</text>
-  <text x="150" y="285" font-size="46" text-anchor="middle" font-family="Georgia, serif" fill="#444">J of Spades</text>
-</svg>
