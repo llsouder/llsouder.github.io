@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perch Fishing at Mosquito Landing - Tuckahoe River, NJ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a3a4a 0%, #0d2633 100%);
+            min-height: 100vh;
+            color: #e8f4f8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .topnav {
+            margin-bottom: 20px;
+        }
+        
+        .topnav a {
+            color: #a8e6cf;
+            text-decoration: none;
+            margin-right: 16px;
+            font-weight: 600;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(26, 58, 74, 0.9) 0%, rgba(13, 38, 51, 0.7) 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .location {
+            font-size: 1.2rem;
+            color: #7dd3e8;
+            margin-bottom: 20px;
+        }
+        
+        .coords {
+            background: rgba(0,0,0,0.3);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            font-family: monospace;
+            color: #a8e6cf;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .card h2 {
+            color: #7dd3e8;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(125, 211, 232, 0.3);
+        }
+        
+        .tide-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .tide-table th, .tide-table td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .tide-table th {
+            color: #7dd3e8;
+            font-weight: 600;
+        }
+        
+        .high-tide {
+            color: #4ade80;
+            font-weight: bold;
+        }
+        
+        .low-tide {
+            color: #f87171;
+        }
+        
+        .best-day {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+        }
+        
+        .good-day {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+        }
+        
+        .fair-day {
+            background: rgba(251, 191, 36, 0.2);
+            border-left: 4px solid #fbbf24;
+        }
+        
+        .poor-day {
+            background: rgba(239, 68, 68, 0.2);
+            border-left: 4px solid #ef4444;
+        }
+        
+        .fishing-calendar {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .fishing-calendar th {
+            background: rgba(125, 211, 232, 0.2);
+            padding: 10px 5px;
+            font-size: 0.85rem;
+        }
+        
+        .fishing-calendar td {
+            padding: 8px 5px;
+            font-size: 0.9rem;
+        }
+        
+        .indicator {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        
+        .indicator-icon {
+            font-size: 2rem;
+        }
+        
+        .indicator h3 {
+            color: #7dd3e8;
+            margin-bottom: 5px;
+        }
+        
+        .solunar-times {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f2847 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .solunar-times h3 {
+            color: #fbbf24;
+            margin-bottom: 15px;
+        }
+        
+        .time-block {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .time-block:last-child {
+            border-bottom: none;
+        }
+        
+        .time-label {
+            color: #a8e6cf;
+        }
+        
+        .time-value {
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .tips-list {
+            list-style: none;
+        }
+        
+        .tips-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .tips-list li:before {
+            content: "🎣";
+            position: absolute;
+            left: 0;
+        }
+        
+        .tips-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .moon-phase {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .moon-icon {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        
+        .moon-name {
+            font-size: 1.5rem;
+            color: #fbbf24;
+            margin-bottom: 5px;
+        }
+        
+        .moon-illumination {
+            color: #a8e6cf;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .update-time {
+            background: rgba(0,0,0,0.3);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .fishing-calendar {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topnav">
+            <a href="./">← Fishing Pages</a>
+            <a href="owls-nest.html">Owls Nest</a>
+        </div>
+        <header>
+            <h1>🎣 White Perch Fishing</h1>
+            <div class="location">Mosquito Landing • Tuckahoe River, New Jersey</div>
+            <div class="coords">📍 GPS: 39.29528, -74.74018</div>
+            <div class="update-time">Near Woodbine, Cape May County, NJ</div>
+        </header>
+        
+        <div class="grid">
+            <div class="card">
+                <h2>🌊 Today's Tides - April 4, 2026</h2>
+                <table class="tide-table">
+                    <tr>
+                        <th>Tide</th>
+                        <th>Time (EDT)</th>
+                        <th>Height</th>
+                    </tr>
+                    <tr>
+                        <td class="low-tide">Low Tide</td>
+                        <td>6:09 AM</td>
+                        <td>0.3 ft</td>
+                    </tr>
+                    <tr>
+                        <td class="high-tide">High Tide</td>
+                        <td>11:43 AM</td>
+                        <td>3.4 ft</td>
+                    </tr>
+                    <tr>
+                        <td class="low-tide">Low Tide</td>
+                        <td>6:13 PM</td>
+                        <td>0.2 ft</td>
+                    </tr>
+                </table>
+                
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #7dd3e8; margin-bottom: 10px;">🌅 Sun Times</h3>
+                    <div class="time-block">
+                        <span class="time-label">Sunrise</span>
+                        <span class="time-value">6:38 AM</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-label">Sunset</span>
+                        <span class="time-value">7:25 PM</span>
+                    </div>
+                </div>
+                
+                <div class="solunar-times">
+                    <h3>🌙 Moon Times</h3>
+                    <div class="time-block">
+                        <span class="time-label">Moonrise</span>
+                        <span class="time-value">10:26 PM</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-label">Moonset</span>
+                        <span class="time-value">7:30 AM</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>🌙 Moon Phase & Best Fishing Times</h2>
+                <div class="moon-phase">
+                    <div class="moon-icon">🌖</div>
+                    <div class="moon-name">Waning Gibbous</div>
+                    <div class="moon-illumination">96% Illuminated • Day 16.7</div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #fbbf24; margin-bottom: 10px;">🎯 Today's Solunar Activity: AVERAGE</h3>
+                    <p style="margin-bottom: 15px;">Based on moon position, fish activity is moderate today.</p>
+                    
+                    <h4 style="color: #4ade80; margin-bottom: 8px;">Major Periods (High Activity)</h4>
+                    <div class="time-block">
+                        <span class="time-label">1:26 AM - 3:26 AM</span>
+                        <span class="time-value">🌙 Lunar transit</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-label">1:58 PM - 3:58 PM</span>
+                        <span class="time-value">Opposing transit</span>
+                    </div>
+                    
+                    <h4 style="color: #60a5fa; margin-bottom: 8px; margin-top: 15px;">Minor Periods (Average Activity)</h4>
+                    <div class="time-block">
+                        <span class="time-label">7:00 AM - 8:00 AM</span>
+                        <span class="time-value">Moonset</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-label">9:56 PM - 10:56 PM</span>
+                        <span class="time-value">Moonrise</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>📊 Tidal Coefficient Today</h2>
+                <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; color: #4ade80; font-weight: bold;">80</div>
+                        <div>Morning</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; color: #60a5fa; font-weight: bold;">75</div>
+                        <div>Afternoon</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; color: #fbbf24; font-weight: bold;">71</div>
+                        <div>Evening</div>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #a8e6cf;">
+                    High tidal coefficient = stronger currents<br>
+                    Good for perch fishing as it moves forage
+                </p>
+                
+                <div class="indicator" style="margin-top: 20px;">
+                    <div class="indicator-icon">📈</div>
+                    <div>
+                        <h3>Tidal Range</h3>
+                        <p>Today: 3.2 ft range (0.3 to 3.4 ft)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>🎯 Fishing Quality Indicators</h2>
+                
+                <div class="indicator">
+                    <div class="indicator-icon">🌖</div>
+                    <div>
+                        <h3>Moon Phase: Good</h3>
+                        <p>Waning gibbous provides moderate fishing. Best fishing during Full and New Moons.</p>
+                    </div>
+                </div>
+                
+                <div class="indicator">
+                    <div class="indicator-icon">🌊</div>
+                    <div>
+                        <h3>Tide Movement: Good</h3>
+                        <p>High coefficient (80) means strong current flow, good for moving bait and fish.</p>
+                    </div>
+                </div>
+                
+                <div class="indicator">
+                    <div class="indicator-icon">🌅</div>
+                    <div>
+                        <h3>Best Window Today</h3>
+                        <p><strong>11:43 AM High Tide</strong> - Fish 1 hour before and after</p>
+                        <p>Combined with solunar period 1:58-3:58 PM</p>
+                    </div>
+                </div>
+                
+                <div class="indicator">
+                    <div class="indicator-icon">🌡️</div>
+                    <div>
+                        <h3>Water Temp Consideration</h3>
+                        <p>April water temps rising. Perch active in 40-48°F range. Look for sunny, warming shallows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📅 April 2026 Fishing Calendar</h2>
+            <p style="margin-bottom: 15px; color: #a8e6cf;">Best fishing days based on moon phases and solunar theory:</p>
+            <div style="overflow-x: auto;">
+                <table class="fishing-calendar">
+                    <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Rating</th>
+                        <th>Moon Phase</th>
+                        <th>Tidal Coef.</th>
+                        <th>Recommendation</th>
+                    </tr>
+                    <tr class="best-day">
+                        <td>Apr 17</td>
+                        <td>Fri</td>
+                        <td>⭐⭐⭐ BEST</td>
+                        <td>New Moon</td>
+                        <td>105</td>
+                        <td>Prime fishing day!</td>
+                    </tr>
+                    <tr class="best-day">
+                        <td>Apr 1</td>
+                        <td>Wed</td>
+                        <td>⭐⭐⭐ BEST</td>
+                        <td>Full Moon</td>
+                        <td>93</td>
+                        <td>Excellent conditions</td>
+                    </tr>
+                    <tr class="good-day">
+                        <td>Apr 15</td>
+                        <td>Wed</td>
+                        <td>⭐⭐ Good</td>
+                        <td>Waxing crescent</td>
+                        <td>92</td>
+                        <td>Very good fishing</td>
+                    </tr>
+                    <tr class="good-day">
+                        <td>Apr 16</td>
+                        <td>Thu</td>
+                        <td>⭐⭐ Good</td>
+                        <td>Waxing crescent</td>
+                        <td>101</td>
+                        <td>Approaching new moon</td>
+                    </tr>
+                    <tr class="good-day">
+                        <td>Apr 18</td>
+                        <td>Sat</td>
+                        <td>⭐⭐ Good</td>
+                        <td>Waxing crescent</td>
+                        <td>103</td>
+                        <td>Post new moon window</td>
+                    </tr>
+                    <tr class="good-day">
+                        <td>Apr 19</td>
+                        <td>Sun</td>
+                        <td>⭐⭐ Good</td>
+                        <td>Waxing crescent</td>
+                        <td>95</td>
+                        <td>Great weekend option</td>
+                    </tr>
+                    <tr class="good-day">
+                        <td>Apr 14</td>
+                        <td>Tue</td>
+                        <td>⭐⭐ Good</td>
+                        <td>Waning crescent</td>
+                        <td>80</td>
+                        <td>Good conditions</td>
+                    </tr>
+                    <tr class="good-day">
+                        <td>Apr 10</td>
+                        <td>Fri</td>
+                        <td>⭐⭐ Good</td>
+                        <td>Last Quarter</td>
+                        <td>28</td>
+                        <td>Quarter moon action</td>
+                    </tr>
+                    <tr class="good-day">
+                        <td>Apr 23</td>
+                        <td>Thu</td>
+                        <td>⭐⭐ Good</td>
+                        <td>First Quarter</td>
+                        <td>46</td>
+                        <td>Quarter moon action</td>
+                    </tr>
+                    <tr class="fair-day">
+                        <td>Apr 4</td>
+                        <td>Sat</td>
+                        <td>⭐ Fair</td>
+                        <td>Waning gibbous</td>
+                        <td>80</td>
+                        <td>Decent morning bite</td>
+                    </tr>
+                    <tr class="poor-day">
+                        <td>Apr 5-7</td>
+                        <td>Sun-Tue</td>
+                        <td>⚠️ Poor</td>
+                        <td>Waning gibbous</td>
+                        <td>71-48</td>
+                        <td>Lower activity expected</td>
+                    </tr>
+                    <tr class="poor-day">
+                        <td>Apr 8-9</td>
+                        <td>Wed-Thu</td>
+                        <td>⚠️ Poor</td>
+                        <td>Waning gibbous</td>
+                        <td>37-29</td>
+                        <td>Minimal tidal movement</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🎣 White Perch Fishing Tips for Tuckahoe River</h2>
+            <ul class="tips-list">
+                <li><strong>Location:</strong> Target ledges where channels meet flats (3-12 ft depth). Perch congregate where forage spills over drop-offs.</li>
+                <li><strong>Best Technique:</strong> Anchor on a ledge, chum with grass shrimp to attract schools. Keep slick going continuously!</li>
+                <li><strong>Bait:</strong> Grass shrimp (live or preserved), bloodworms, or SPRO Phat Fly jigs tipped with shrimp.</li>
+                <li><strong>Rig:</strong> High-low pill float rig with size 4-6 hooks, 1 oz bank sinker. Or 1/16-1/8 oz jigs.</li>
+                <li><strong>Timing:</strong> Outgoing tide in late morning/afternoon is prime - sun warms shallows and draws perch onto flats.</li>
+                <li><strong>Water Temp:</strong> Perch active 40-48°F. Sunny days after cold spells are excellent.</li>
+                <li><strong>Tidal Movement:</strong> Fish 1 hour before and after high tide for best action.</li>
+                <li><strong>Chumming:</strong> Essential! Toss handful of grass shrimp every minute. Add Pro-Cure Shrimp Oil for scent.</li>
+                <li><strong>Double Headers:</strong> When bite is on, perch come up two at a time - have multiple rods ready!</li>
+                <li><strong>Bag Limit:</strong> 25 fish per person in NJ saltwater. Plan ~3 fish per diner for meals.</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2>🚤 Mosquito Landing Access</h2>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #7dd3e8; margin-bottom: 10px;">📍 Location</h4>
+                    <p>Tuckahoe Wildlife Management Area</p>
+                    <p>Upper Township, Cape May County, NJ</p>
+                    <p style="font-family: monospace; color: #a8e6cf; margin-top: 10px;">39.29528°N, 74.74018°W</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #7dd3e8; margin-bottom: 10px;">🚗 Access</h4>
+                    <p>Boat launch available</p>
+                    <p>Nearby towns: Woodbine (5 mi), Tuckahoe (3 mi)</p>
+                    <p>Shore fishing: Limited - boat/kayak best</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #7dd3e8; margin-bottom: 10px;">🎯 Species</h4>
+                    <p>• White Perch ★ Primary</p>
+                    <p>• Striped Bass</p>
+                    <p>• Yellow Perch</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Data sourced from NOAA tide predictions, tides4fishing.com, and Farmers Almanac</p>
+            <p style="margin-top: 10px;">Always verify conditions before heading out. Tide times are predictions.</p>
+            <div class="update-time">Page generated: April 7, 2026</div>
+        </footer>
+    </div>
+</body>
+</html>

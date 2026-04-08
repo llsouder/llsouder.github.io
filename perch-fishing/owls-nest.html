@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perch Fishing at Owls Nest - Dividing Creek, Hansey Creek, NJ</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #183646 0%, #0d2633 100%);
+            min-height: 100vh;
+            color: #e8f4f8;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .topnav {
+            margin-bottom: 20px;
+        }
+        .topnav a {
+            color: #a8e6cf;
+            text-decoration: none;
+            margin-right: 16px;
+            font-weight: 600;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(24, 54, 70, 0.9) 0%, rgba(13, 38, 51, 0.75) 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .location {
+            font-size: 1.2rem;
+            color: #7dd3e8;
+            margin-bottom: 20px;
+        }
+        .coords {
+            background: rgba(0,0,0,0.3);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            font-family: monospace;
+            color: #a8e6cf;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .card h2 {
+            color: #7dd3e8;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(125, 211, 232, 0.3);
+        }
+        .time-block {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .time-block:last-child { border-bottom: none; }
+        .time-label { color: #a8e6cf; }
+        .time-value { font-weight: bold; color: #fff; }
+        .indicator {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        .indicator-icon { font-size: 2rem; }
+        .tips-list { list-style: none; }
+        .tips-list li {
+            padding: 12px 0 12px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .tips-list li:before {
+            content: "🎣";
+            position: absolute;
+            left: 0;
+        }
+        .tips-list li:last-child { border-bottom: none; }
+        .update-time {
+            background: rgba(0,0,0,0.3);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topnav">
+            <a href="./">← Fishing Pages</a>
+            <a href="mosquito-landing.html">Mosquito Landing</a>
+        </div>
+        <header>
+            <h1>🎣 White Perch Fishing</h1>
+            <div class="location">Owls Nest • Dividing Creek, Hansey Creek, New Jersey</div>
+            <div class="coords">📍 Location focus: Dividing Creek / Hansey Creek marsh system</div>
+            <div class="update-time">South Jersey backwater perch spot</div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h2>🌊 Daily Snapshot</h2>
+                <div class="time-block">
+                    <span class="time-label">Location</span>
+                    <span class="time-value">Owls Nest</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-label">Water System</span>
+                    <span class="time-value">Dividing Creek / Hansey Creek</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-label">Target Species</span>
+                    <span class="time-value">White Perch</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-label">Current Page Status</span>
+                    <span class="time-value">Template ready for daily refresh</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Fishing Notes</h2>
+                <div class="indicator">
+                    <div class="indicator-icon">🌾</div>
+                    <div>
+                        <h3>Creek and marsh edges</h3>
+                        <p>Focus on bends, creek mouths, and depth changes where current sweeps food out of the grass.</p>
+                    </div>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-icon">🌊</div>
+                    <div>
+                        <h3>Moving water matters</h3>
+                        <p>Outgoing and incoming movement both matter here, especially near pinch points and drains.</p>
+                    </div>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-icon">🦐</div>
+                    <div>
+                        <h3>Shrimp and small baits</h3>
+                        <p>Grass shrimp, bloodworms, and small jigs are good starting points for perch in this water.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🗓️ Daily Update Plan</h2>
+            <p style="margin-bottom: 15px; color: #a8e6cf;">This page is set up to be refreshed by the daily agent job at 5:30 AM.</p>
+            <ul class="tips-list">
+                <li>Insert daily tide windows once the refresh script is wired to a data source.</li>
+                <li>Insert moon phase and solunar information for the current date.</li>
+                <li>Update the fishing summary and page generated date automatically.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🚤 Owls Nest Access Notes</h2>
+            <ul class="tips-list">
+                <li><strong>Area:</strong> Dividing Creek / Hansey Creek marsh water in Cumberland County, New Jersey.</li>
+                <li><strong>Approach:</strong> Treat it like a moving-water perch spot, focusing on cuts, bends, and edges with bait movement.</li>
+                <li><strong>Best use:</strong> This page gives you a second daily target location alongside Mosquito Landing.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Daily fishing data page for Owls Nest.</p>
+            <p style="margin-top: 10px;">Always verify conditions before heading out.</p>
+            <div class="update-time">Page generated: April 7, 2026</div>
+        </footer>
+    </div>
+</body>
+</html>
