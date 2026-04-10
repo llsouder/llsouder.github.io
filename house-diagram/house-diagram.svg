@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <style>
+    .outer { fill: #faf7f2; stroke: #333; stroke-width: 3; }
+    .room { fill: #ffffff; stroke: #333; stroke-width: 2; }
+    .attic { fill: #e9e9e9; stroke: #333; stroke-width: 2; }
+    .label { font: 28px Arial, sans-serif; fill: #222; text-anchor: middle; }
+    .small { font: 20px Arial, sans-serif; fill: #444; text-anchor: middle; }
+    .title { font: 34px Arial, sans-serif; fill: #222; text-anchor: middle; font-weight: bold; }
+    .edge { font: 30px Arial, sans-serif; fill: #444; text-anchor: middle; }
+    .dim { font: 22px Arial, sans-serif; fill: #555; }
+  </style>
+
+  <text x="600" y="50" class="title">House Diagram from Sketch</text>
+  <text x="600" y="95" class="edge">Back</text>
+  <text x="600" y="735" class="edge">Front</text>
+
+  <rect x="120" y="140" width="920" height="520" class="outer"/>
+
+  <rect x="120" y="320" width="300" height="340" class="room"/>
+  <text x="270" y="500" class="label" transform="rotate(-28 270 500)">Bedroom</text>
+  <text x="245" y="640" class="dim">16.5'</text>
+
+  <rect x="420" y="140" width="140" height="160" class="attic"/>
+  <text x="490" y="225" class="small" transform="rotate(-28 490 225)">Attic</text>
+  <text x="490" y="250" class="small" transform="rotate(-28 490 250)">Bathroom</text>
+
+  <rect x="560" y="140" width="170" height="160" class="attic"/>
+  <text x="645" y="220" class="small" transform="rotate(-28 645 220)">Attic</text>
+  <text x="645" y="245" class="small" transform="rotate(-28 645 245)">Bathroom</text>
+
+  <rect x="730" y="140" width="80" height="160" class="attic"/>
+  <text x="770" y="220" class="small" transform="rotate(-28 770 220)">Attic</text>
+  <text x="770" y="245" class="small" transform="rotate(-28 770 245)">Closet</text>
+
+  <rect x="810" y="140" width="210" height="160" class="attic"/>
+  <text x="915" y="220" class="label">Attic Office</text>
+
+  <rect x="1020" y="140" width="20" height="160" class="attic" opacity="0"/>
+  <rect x="930" y="140" width="110" height="160" class="attic"/>
+  <text x="985" y="220" class="small">Attic</text>
+  <text x="985" y="245" class="small">Nursery</text>
+
+  <rect x="420" y="300" width="510" height="70" class="attic" fill="#f4f4f4"/>
+  <text x="675" y="345" class="label">Hallway</text>
+
+  <rect x="420" y="370" width="210" height="290" class="room"/>
+  <text x="525" y="640" class="dim">8'</text>
+
+  <rect x="630" y="370" width="110" height="290" class="attic"/>
+  <text x="685" y="520" class="label" transform="rotate(-28 685 520)">Attic</text>
+
+  <rect x="740" y="370" width="300" height="290" class="room"/>
+  <text x="890" y="505" class="label" transform="rotate(-10 890 505)">Bedroom</text>
+  <text x="890" y="640" class="dim">17'</text>
+
+  <text x="165" y="230" class="dim">8.5'</text>
+  <text x="70" y="430" class="dim" transform="rotate(-90 70 430)">22' chimney</text>
+  <text x="760" y="520" class="dim" transform="rotate(-90 760 520)">13.5'</text>
+  <text x="105" y="150" class="dim">Peak</text>
+</svg>
