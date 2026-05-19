@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flounder Fishing - Faunce Landing / Atlantic City-Brigantine Bays</title>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --line: #d7dde5;
+      --text: #14212b;
+      --muted: #5f6b76;
+      --link: #0b63c9;
+      --accent: #0f766e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .source-table,
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 0.95rem;
+    }
+    th {
+      background: #eef3f8;
+    }
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+    }
+    .status {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 8px;
+    }
+    .small {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .ok { color: var(--accent); font-weight: 700; }
+    @media (max-width: 700px) {
+      .wrap { padding: 12px; }
+      th, td { font-size: 0.88rem; padding: 7px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <h1>Flounder Fishing - Faunce Landing / Atlantic City-Brigantine Bays</h1>
+      <div class="meta">Plain source page for the bays between Atlantic City and Brigantine.</div>
+      <div class="meta">Launch reference: Faunce Landing, Absecon side.</div>
+      <div class="meta">Page published: 2026-05-19 08:51 EDT</div>
+    </div>
+
+    <div class="panel">
+      <h2>Charts and sources</h2>
+      <table class="source-table">
+        <thead>
+          <tr>
+            <th>Section</th>
+            <th>Area</th>
+            <th>Source</th>
+            <th>Published / updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534496" target="_blank" rel="noopener noreferrer">Tide chart</a></td>
+            <td>Brigantine Channel</td>
+            <td>NOAA station 8534496</td>
+            <td id="published-8534496">Checking...</td>
+          </tr>
+          <tr>
+            <td><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank" rel="noopener noreferrer">Tide chart</a></td>
+            <td>Atlantic City</td>
+            <td>NOAA station 8534720</td>
+            <td id="published-8534720">Checking...</td>
+          </tr>
+          <tr>
+            <td><a href="https://forecast.weather.gov/MapClick.php?lat=39.4215&lon=-74.455&unit=0&lg=english&FcstType=digital" target="_blank" rel="noopener noreferrer">Wind forecast</a></td>
+            <td>Faunce Landing / back bay side</td>
+            <td>NWS hourly point forecast</td>
+            <td id="published-wind">Checking...</td>
+          </tr>
+          <tr>
+            <td><a id="moon-link" href="https://www.timeanddate.com/moon/usa/atlantic-city" target="_blank" rel="noopener noreferrer">Moon chart</a></td>
+            <td>Atlantic City</td>
+            <td>Monthly moon calendar</td>
+            <td id="published-moon">Monthly calendar</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2>Brigantine Channel tides</h2>
+        <div class="small">NOAA station 8534496</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Type</th>
+              <th>Feet</th>
+            </tr>
+          </thead>
+          <tbody id="tides-8534496">
+            <tr><td colspan="3">Loading...</td></tr>
+          </tbody>
+        </table>
+        <div class="status" id="status-8534496"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Atlantic City tides</h2>
+        <div class="small">NOAA station 8534720</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Type</th>
+              <th>Feet</th>
+            </tr>
+          </thead>
+          <tbody id="tides-8534720">
+            <tr><td colspan="3">Loading...</td></tr>
+          </tbody>
+        </table>
+        <div class="status" id="status-8534720"></div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2>Wind - next 12 hours</h2>
+        <div class="small">NWS point forecast near Faunce Landing</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Wind</th>
+              <th>Forecast</th>
+            </tr>
+          </thead>
+          <tbody id="wind-rows">
+            <tr><td colspan="3">Loading...</td></tr>
+          </tbody>
+        </table>
+        <div class="status" id="status-wind"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Moon</h2>
+        <table class="data-table">
+          <tbody>
+            <tr>
+              <th>Current phase</th>
+              <td id="moon-phase">Loading...</td>
+            </tr>
+            <tr>
+              <th>Illumination</th>
+              <td id="moon-illumination">Loading...</td>
+            </tr>
+            <tr>
+              <th>Monthly chart</th>
+              <td><a id="moon-chart-link" href="https://www.timeanddate.com/moon/usa/atlantic-city" target="_blank" rel="noopener noreferrer">Open Atlantic City moon calendar</a></td>
+            </tr>
+            <tr>
+              <th>Calendar month</th>
+              <td id="moon-month">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="status">Moon section uses the current month calendar.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    });
+
+    function formatTime(value) {
+      return formatter.format(new Date(value));
+    }
+
+    function formatNoaaTime(value) {
+      return formatter.format(new Date(value.replace(' ', 'T')));
+    }
+
+    function setMoonInfo() {
+      const now = new Date();
+      const synodicMonth = 29.530588853;
+      const knownNewMoon = Date.UTC(2000, 0, 6, 18, 14, 0);
+      const daysSince = (now.getTime() - knownNewMoon) / 86400000;
+      const age = ((daysSince % synodicMonth) + synodicMonth) % synodicMonth;
+      const illumination = (1 - Math.cos((2 * Math.PI * age) / synodicMonth)) / 2;
+
+      let phase = 'New Moon';
+      if (age >= 1.84566 && age < 5.53699) phase = 'Waxing Crescent';
+      else if (age >= 5.53699 && age < 9.22831) phase = 'First Quarter';
+      else if (age >= 9.22831 && age < 12.91963) phase = 'Waxing Gibbous';
+      else if (age >= 12.91963 && age < 16.61096) phase = 'Full Moon';
+      else if (age >= 16.61096 && age < 20.30228) phase = 'Waning Gibbous';
+      else if (age >= 20.30228 && age < 23.99361) phase = 'Last Quarter';
+      else if (age >= 23.99361 && age < 27.68493) phase = 'Waning Crescent';
+
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const monthLabel = now.toLocaleString('en-US', { month: 'long', year: 'numeric', timeZone: 'America/New_York' });
+      const moonUrl = `https://www.timeanddate.com/moon/usa/atlantic-city?month=${month}&year=${year}`;
+
+      document.getElementById('moon-phase').textContent = phase;
+      document.getElementById('moon-illumination').textContent = `${Math.round(illumination * 100)}%`;
+      document.getElementById('moon-month').textContent = monthLabel;
+      document.getElementById('moon-link').href = moonUrl;
+      document.getElementById('moon-chart-link').href = moonUrl;
+      document.getElementById('published-moon').textContent = monthLabel;
+    }
+
+    async function loadTides(stationId) {
+      const now = new Date();
+      const end = new Date(now.getTime() + 7 * 86400000);
+      const fmt = (d) => {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}${m}${day}`;
+      };
+      const url = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&application=OpenClaw&begin_date=${fmt(now)}&end_date=${fmt(end)}&datum=MLLW&station=${stationId}&time_zone=lst_ldt&units=english&interval=hilo&format=json`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        const rows = (data.predictions || []).slice(0, 14).map((item) => {
+          const kind = item.type === 'H' ? 'High' : 'Low';
+          return `<tr><td>${formatNoaaTime(item.t)}</td><td>${kind}</td><td>${Number(item.v).toFixed(2)}</td></tr>`;
+        }).join('');
+
+        document.getElementById(`tides-${stationId}`).innerHTML = rows || '<tr><td colspan="3">No data.</td></tr>';
+        document.getElementById(`status-${stationId}`).textContent = 'Live NOAA predictions. NOAA does not provide an issue time on this endpoint.';
+        document.getElementById(`published-${stationId}`).textContent = 'Live NOAA predictions';
+      } catch (error) {
+        document.getElementById(`tides-${stationId}`).innerHTML = '<tr><td colspan="3">Could not load data.</td></tr>';
+        document.getElementById(`status-${stationId}`).textContent = 'Load failed.';
+        document.getElementById(`published-${stationId}`).textContent = 'Unavailable';
+      }
+    }
+
+    async function loadWind() {
+      try {
+        const url = 'https://api.weather.gov/gridpoints/PHI/78,59/forecast/hourly';
+        const res = await fetch(url, { headers: { 'Accept': 'application/geo+json' } });
+        const data = await res.json();
+        const periods = (data.properties?.periods || []).slice(0, 12);
+        const rows = periods.map((item) => `
+          <tr>
+            <td>${formatTime(item.startTime)}</td>
+            <td>${item.windDirection} ${item.windSpeed}</td>
+            <td>${item.shortForecast || ''}</td>
+          </tr>
+        `).join('');
+
+        document.getElementById('wind-rows').innerHTML = rows || '<tr><td colspan="3">No data.</td></tr>';
+        const updateTime = data.properties?.updateTime ? formatTime(data.properties.updateTime) : 'Unavailable';
+        document.getElementById('published-wind').textContent = updateTime;
+        document.getElementById('status-wind').innerHTML = `Published by NWS: <span class="ok">${updateTime}</span>`;
+      } catch (error) {
+        document.getElementById('wind-rows').innerHTML = '<tr><td colspan="3">Could not load data.</td></tr>';
+        document.getElementById('published-wind').textContent = 'Unavailable';
+        document.getElementById('status-wind').textContent = 'Load failed.';
+      }
+    }
+
+    setMoonInfo();
+    loadTides('8534496');
+    loadTides('8534720');
+    loadWind();
+  </script>
+</body>
+</html>
