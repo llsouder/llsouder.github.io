@@ -131,100 +131,158 @@
             <strong>Current kickoff event:</strong> Sunday, June 7, 2026 — Luke's birthday celebration with a taco bowl party. Taco bowl party is for June 7 only.
         </section>
 
+        <section class="note">
+            <strong>Weather report:</strong> Forecasts are set for Buena, NJ 08310. Exact temperatures only show up when a Sunday gets close enough for the National Weather Service forecast window, so later Sundays will stay marked as pending until then.
+        </section>
+
         <section class="calendar">
-            <article class="card featured">
+            <article class="card featured" data-date="2026-06-07">
                 <div class="date">Sunday • June 7, 2026</div>
                 <div class="title">Luke's Birthday Celebration</div>
                 <div class="tag">Taco Bowl Party</div>
                 <div class="muted">Kickoff Souder Summer Sunday. Family get-together for Luke's birthday celebration. Taco bowl party is for this June 7 event only.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-06-14">
                 <div class="date">Sunday • June 14, 2026</div>
                 <div class="title">Luke's Graduation Party</div>
                 <div class="tag">Here</div>
                 <div class="muted">Graduation party here for family, friends, and whoever is invited to celebrate Luke.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-06-21">
                 <div class="date">Sunday • June 21, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-06-28">
                 <div class="date">Sunday • June 28, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-07-05">
                 <div class="date">Sunday • July 5, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-07-12">
                 <div class="date">Sunday • July 12, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-07-19">
                 <div class="date">Sunday • July 19, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-07-26">
                 <div class="date">Sunday • July 26, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-08-02">
                 <div class="date">Sunday • August 2, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-08-09">
                 <div class="date">Sunday • August 9, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-08-16">
                 <div class="date">Sunday • August 16, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-08-23">
                 <div class="date">Sunday • August 23, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
 
-            <article class="card">
+            <article class="card" data-date="2026-08-30">
                 <div class="date">Sunday • August 30, 2026</div>
                 <div class="title">Souder Summer Sunday</div>
                 <div class="tag">Open</div>
                 <div class="muted">Details to be added.</div>
+                <div class="muted weather-slot">Weather: forecast pending</div>
             </article>
         </section>
 
         <div class="footer">Updated for the 2026 family Sunday calendar.</div>
     </div>
+
+    <script>
+        const SUNDAY_FORECASTS = document.querySelectorAll('[data-date]');
+        const forecastUrl = 'https://api.weather.gov/gridpoints/PHI/62,62/forecast';
+
+        function setPending(card, message) {
+            const slot = card.querySelector('.weather-slot');
+            if (slot) slot.textContent = `Weather: ${message}`;
+        }
+
+        fetch(forecastUrl)
+            .then((res) => res.json())
+            .then((data) => {
+                const periods = (data && data.properties && data.properties.periods) || [];
+                const dayMap = new Map();
+
+                periods.forEach((period) => {
+                    if (!period.isDaytime) return;
+                    const key = new Date(period.startTime).toISOString().slice(0, 10);
+                    dayMap.set(key, period);
+                });
+
+                SUNDAY_FORECASTS.forEach((card) => {
+                    const key = card.getAttribute('data-date');
+                    const slot = card.querySelector('.weather-slot');
+                    if (!slot) return;
+                    const period = dayMap.get(key);
+
+                    if (period) {
+                        const rain = period.probabilityOfPrecipitation && period.probabilityOfPrecipitation.value;
+                        const rainText = rain || rain === 0 ? ` • Rain ${rain}%` : '';
+                        slot.textContent = `Weather: High ${period.temperature}°${period.temperatureUnit} • ${period.shortForecast}${rainText}`;
+                    } else {
+                        slot.textContent = 'Weather: forecast pending — NWS forecast is not out that far yet';
+                    }
+                });
+            })
+            .catch(() => {
+                SUNDAY_FORECASTS.forEach((card) => setPending(card, 'unavailable right now'));
+            });
+    </script>
 </body>
 </html>
