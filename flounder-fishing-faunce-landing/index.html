@@ -76,6 +76,30 @@
       color: var(--muted);
     }
     .ok { color: var(--accent); font-weight: 700; }
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .report-card {
+      background: #f7fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .report-card h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+    .report-card p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    .go {
+      color: #0f766e;
+      font-weight: 700;
+    }
     @media (max-width: 700px) {
       .wrap { padding: 12px; }
       th, td { font-size: 0.88rem; padding: 7px 8px; }
@@ -88,7 +112,40 @@
       <h1>Flounder Fishing - Faunce Landing / Atlantic City-Brigantine Bays</h1>
       <div class="meta">Plain source page for the bays between Atlantic City and Brigantine.</div>
       <div class="meta">Launch reference: Faunce Landing, Absecon side.</div>
-      <div class="meta">Page published: 2026-05-19 08:51 EDT</div>
+      <div class="meta">Page published: 2026-06-18 12:21 EDT</div>
+    </div>
+
+    <div class="panel">
+      <h2>Tomorrow fishing report - Friday 6/19</h2>
+      <div class="meta">Quick read for the back-bay side behind Atlantic City / Brigantine.</div>
+      <p><span class="go">Looks fishable.</span> Best setup is late morning into afternoon after the early shower chance fades and the tide pushes toward the midday high.</p>
+      <div class="report-grid">
+        <div class="report-card">
+          <h3>Tide</h3>
+          <p>Atlantic City proxy: low 5:50 AM, high 11:59 AM, low 5:52 PM.</p>
+          <p>Brigantine Channel: low 6:48 AM, high 12:58 PM, low 6:50 PM.</p>
+        </div>
+        <div class="report-card">
+          <h3>Wind</h3>
+          <p>Light west wind early around 5 mph, then southwest 10 mph in the afternoon, back west later.</p>
+        </div>
+        <div class="report-card">
+          <h3>Temp</h3>
+          <p>About 71°F at daybreak, upper 60s to low 70s late morning, low to mid 70s by late afternoon.</p>
+        </div>
+        <div class="report-card">
+          <h3>Rain / storm</h3>
+          <p>Small morning shower chance, then clearing. No real thunderstorm signal for Friday.</p>
+        </div>
+        <div class="report-card">
+          <h3>Marine flags</h3>
+          <p>Today has the Small Craft Advisory. I am not seeing one posted for Friday. Ocean seas still look around 3 to 4 ft, but the back bay should be much more manageable.</p>
+        </div>
+        <div class="report-card">
+          <h3>Best window</h3>
+          <p>Late morning through afternoon, especially as the water builds toward the midday/early afternoon high.</p>
+        </div>
+      </div>
     </div>
 
     <div class="panel">
