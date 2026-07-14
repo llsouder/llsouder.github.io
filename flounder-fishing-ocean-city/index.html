@@ -100,6 +100,33 @@
       color: #0f766e;
       font-weight: 700;
     }
+    .tab-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .tab-button {
+      border: 1px solid var(--line);
+      background: #eef3f8;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .tab-button.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+    }
     @media (max-width: 700px) {
       .wrap { padding: 12px; }
       th, td { font-size: 0.88rem; padding: 7px 8px; }
@@ -111,53 +138,103 @@
     <div class="panel">
       <h1>Kingfish &amp; Surf Fishing - Ocean City 14th Street</h1>
       <div class="meta">Ocean City, NJ — 14th Street Fishing Pier / 14th-15th St ocean side.</div>
-      <div class="meta">Quick surf read focused on kingfish with detailed tide times for Tuesday 7/14.</div>
-      <div class="meta">Page published: 2026-07-14 09:37 EDT</div>
+      <div class="meta">Quick surf read focused on kingfish with detailed tide times for today and tomorrow.</div>
+      <div class="meta">Page published: 2026-07-14 09:42 EDT</div>
     </div>
 
     <div class="panel">
-      <h2>Today surf fishing report - Tuesday 7/14</h2>
-      <div class="meta">Detailed tide read for Ocean City 14th Street with a kingfish / surf-fishing angle.</div>
-      <p><span class="go">Main read:</span> kingfish and general surf action usually set up best on moving water, and the cleaner-looking shot today is the late afternoon into evening push after the 2:50 PM low, building toward the 9:05 PM high.</p>
-      <div class="report-grid">
-        <div class="report-card">
-          <h3>Tides for 7/14</h3>
-          <p>Low 2:50 AM at -0.35 ft.</p>
-          <p>High 8:48 AM at 4.05 ft.</p>
-          <p>Low 2:50 PM at -0.14 ft.</p>
-          <p>High 9:05 PM at 5.09 ft.</p>
+      <div class="tab-bar" role="tablist" aria-label="Fishing reports by day">
+        <button class="tab-button active" data-tab="today-report" role="tab" aria-selected="true">Today - Tue 7/14</button>
+        <button class="tab-button" data-tab="tomorrow-report" role="tab" aria-selected="false">Tomorrow - Wed 7/15</button>
+      </div>
+
+      <div class="tab-panel active" id="today-report" role="tabpanel">
+        <h2>Today surf fishing report - Tuesday 7/14</h2>
+        <div class="meta">Detailed tide read for Ocean City 14th Street with a kingfish / surf-fishing angle.</div>
+        <p><span class="go">Main read:</span> kingfish and general surf action usually set up best on moving water, and the cleaner-looking shot today is the late afternoon into evening push after the 2:50 PM low, building toward the 9:05 PM high.</p>
+        <div class="report-grid">
+          <div class="report-card">
+            <h3>Tides for 7/14</h3>
+            <p>Low 2:50 AM at -0.35 ft.</p>
+            <p>High 8:48 AM at 4.05 ft.</p>
+            <p>Low 2:50 PM at -0.14 ft.</p>
+            <p>High 9:05 PM at 5.09 ft.</p>
+          </div>
+          <div class="report-card">
+            <h3>Best kingfish windows</h3>
+            <p>Early shot: about 6:45 AM to 9:15 AM around the morning high.</p>
+            <p>Better late shot: about 4:30 PM to 9:30 PM on the incoming water.</p>
+          </div>
+          <div class="report-card">
+            <h3>Surf read</h3>
+            <p>Midday falling water can still produce, but it is usually less attractive than the tide-change windows.</p>
+            <p>The late incoming tide is the best-looking setup on paper for kingfish and general bait activity.</p>
+          </div>
+          <div class="report-card">
+            <h3>Right now</h3>
+            <p>The morning high already passed, so water is dropping toward the 2:50 PM low before turning back in.</p>
+          </div>
+          <div class="report-card">
+            <h3>Tide strength</h3>
+            <p>Morning swing runs about 4.4 ft.</p>
+            <p>Evening swing runs about 5.2 ft and is the stronger push of the day.</p>
+          </div>
+          <div class="report-card">
+            <h3>Sun</h3>
+            <p>Sunrise 5:43 AM.</p>
+            <p>Sunset 8:24 PM.</p>
+          </div>
+          <div class="report-card">
+            <h3>Simple rig note</h3>
+            <p>For kingfish, think small hooks, bloodworms or Fishbites, and enough weight to hold bottom in the sweep.</p>
+          </div>
+          <div class="report-card">
+            <h3>Bottom line</h3>
+            <p>If you can pick one window, fish the evening incoming tide into dark.</p>
+          </div>
         </div>
-        <div class="report-card">
-          <h3>Best kingfish windows</h3>
-          <p>Early shot: about 6:45 AM to 9:15 AM around the morning high.</p>
-          <p>Better late shot: about 4:30 PM to 9:30 PM on the incoming water.</p>
-        </div>
-        <div class="report-card">
-          <h3>Surf read</h3>
-          <p>Midday falling water can still produce, but it is usually less attractive than the tide-change windows.</p>
-          <p>The late incoming tide is the best-looking setup on paper for kingfish and general bait activity.</p>
-        </div>
-        <div class="report-card">
-          <h3>Right now</h3>
-          <p>The morning high already passed, so water is dropping toward the 2:50 PM low before turning back in.</p>
-        </div>
-        <div class="report-card">
-          <h3>Tide strength</h3>
-          <p>Morning swing runs about 4.4 ft.</p>
-          <p>Evening swing runs about 5.2 ft and is the stronger push of the day.</p>
-        </div>
-        <div class="report-card">
-          <h3>Sun</h3>
-          <p>Sunrise 5:43 AM.</p>
-          <p>Sunset 8:24 PM.</p>
-        </div>
-        <div class="report-card">
-          <h3>Simple rig note</h3>
-          <p>For kingfish, think small hooks, bloodworms or Fishbites, and enough weight to hold bottom in the sweep.</p>
-        </div>
-        <div class="report-card">
-          <h3>Bottom line</h3>
-          <p>If you can pick one window, fish the evening incoming tide into dark.</p>
+      </div>
+
+      <div class="tab-panel" id="tomorrow-report" role="tabpanel">
+        <h2>Tomorrow surf fishing report - Wednesday 7/15</h2>
+        <div class="meta">Next-day tide read for Ocean City 14th Street, using the nearby Atlantic City NOAA pattern as a timing check.</div>
+        <p><span class="go">Main read:</span> tomorrow sets up a lot like today, but the evening push looks a little stronger. If you want the better kingfish surf window, lean on the incoming tide after the 2:47 PM low and fish it toward the 9:13 PM high.</p>
+        <div class="report-grid">
+          <div class="report-card">
+            <h3>Tides for 7/15</h3>
+            <p>Low 2:54 AM at -0.45 ft.</p>
+            <p>High 8:56 AM at 4.24 ft.</p>
+            <p>Low 2:47 PM at -0.31 ft.</p>
+            <p>High 9:13 PM at 5.56 ft.</p>
+          </div>
+          <div class="report-card">
+            <h3>Best kingfish windows</h3>
+            <p>Early shot: about 7:00 AM to 9:30 AM around the morning high.</p>
+            <p>Better late shot: about 4:30 PM to 9:45 PM on the incoming water.</p>
+          </div>
+          <div class="report-card">
+            <h3>Surf read</h3>
+            <p>The midday drop still looks like the weaker stretch.</p>
+            <p>The evening flood tide looks stronger than today's and is the better bet for active water and bait movement.</p>
+          </div>
+          <div class="report-card">
+            <h3>Tide strength</h3>
+            <p>Morning swing runs about 4.7 ft.</p>
+            <p>Evening swing runs about 5.9 ft and is the stronger movement of the day.</p>
+          </div>
+          <div class="report-card">
+            <h3>Sun</h3>
+            <p>Sunrise about 5:44 AM.</p>
+            <p>Sunset about 8:23 PM.</p>
+          </div>
+          <div class="report-card">
+            <h3>Simple rig note</h3>
+            <p>Same idea: small hooks, bloodworms or Fishbites, and enough lead to stay pinned in the sweep.</p>
+          </div>
+          <div class="report-card">
+            <h3>Bottom line</h3>
+            <p>If you are picking tomorrow's window in advance, the evening incoming tide is the one to circle.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -204,24 +281,52 @@
 
     <div class="grid">
       <div class="panel">
-        <h2>Ocean City 7/14 tide detail</h2>
-        <div class="small">Static tide detail for Tuesday 7/14 for surf fishing at 14th Street</div>
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Type</th>
-              <th>Feet</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>2:50 AM</td><td>Low</td><td>-0.35</td></tr>
-            <tr><td>8:48 AM</td><td>High</td><td>4.05</td></tr>
-            <tr><td>2:50 PM</td><td>Low</td><td>-0.14</td></tr>
-            <tr><td>9:05 PM</td><td>High</td><td>5.09</td></tr>
-          </tbody>
-        </table>
-        <div class="status">Ocean City tide detail for 7/14, useful for timing kingfish and surf-fishing windows, matched against the nearby Atlantic City NOAA pattern.</div>
+        <div class="tab-bar" role="tablist" aria-label="Tide detail by day">
+          <button class="tab-button active" data-tab="today-tides" role="tab" aria-selected="true">7/14 tide detail</button>
+          <button class="tab-button" data-tab="tomorrow-tides" role="tab" aria-selected="false">7/15 tide detail</button>
+        </div>
+
+        <div class="tab-panel active" id="today-tides" role="tabpanel">
+          <h2>Ocean City 7/14 tide detail</h2>
+          <div class="small">Static tide detail for Tuesday 7/14 for surf fishing at 14th Street</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Type</th>
+                <th>Feet</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2:50 AM</td><td>Low</td><td>-0.35</td></tr>
+              <tr><td>8:48 AM</td><td>High</td><td>4.05</td></tr>
+              <tr><td>2:50 PM</td><td>Low</td><td>-0.14</td></tr>
+              <tr><td>9:05 PM</td><td>High</td><td>5.09</td></tr>
+            </tbody>
+          </table>
+          <div class="status">Ocean City tide detail for 7/14, useful for timing kingfish and surf-fishing windows, matched against the nearby Atlantic City NOAA pattern.</div>
+        </div>
+
+        <div class="tab-panel" id="tomorrow-tides" role="tabpanel">
+          <h2>Ocean City 7/15 tide detail</h2>
+          <div class="small">Next-day tide detail for Wednesday 7/15 using the nearby Atlantic City NOAA pattern as the timing check</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Type</th>
+                <th>Feet</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2:54 AM</td><td>Low</td><td>-0.45</td></tr>
+              <tr><td>8:56 AM</td><td>High</td><td>4.24</td></tr>
+              <tr><td>2:47 PM</td><td>Low</td><td>-0.31</td></tr>
+              <tr><td>9:13 PM</td><td>High</td><td>5.56</td></tr>
+            </tbody>
+          </table>
+          <div class="status">Tomorrow's timing uses nearby Atlantic City NOAA predictions as the proxy reference for the Ocean City surf pattern.</div>
+        </div>
       </div>
 
       <div class="panel">
@@ -390,6 +495,25 @@
       }
     }
 
+    function setupTabs() {
+      const buttons = document.querySelectorAll('.tab-button');
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const tabId = button.dataset.tab;
+          const group = button.parentElement;
+          group.querySelectorAll('.tab-button').forEach((btn) => {
+            btn.classList.toggle('active', btn === button);
+            btn.setAttribute('aria-selected', btn === button ? 'true' : 'false');
+          });
+          const panelContainer = group.parentElement;
+          panelContainer.querySelectorAll(':scope > .tab-panel').forEach((panel) => {
+            panel.classList.toggle('active', panel.id === tabId);
+          });
+        });
+      });
+    }
+
+    setupTabs();
     setMoonInfo();
     loadTides('8534720');
     loadWind();
